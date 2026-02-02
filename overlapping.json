@@ -1,0 +1,38 @@
+{
+  "description": "Edge case: overlapping speaker segments (implementation-dependent handling)",
+  "speakerSegments": [
+    { "start": 0, "end": 5000, "speakerId": "speaker_1" },
+    { "start": 3000, "end": 7000, "speakerId": "speaker_2" }
+  ],
+  "cutSegments": [],
+  "expectedOutput": "IMPLEMENTATION_DEPENDENT",
+  "notes": [
+    "Speakers overlap from 3000-5000ms",
+    "Candidates should decide how to handle this:",
+    "  Option 1: Throw validation error (strictest)",
+    "  Option 2: Priority-based (first speaker wins, or last speaker wins)",
+    "  Option 3: Split the overlap somehow",
+    "  Option 4: Create overlapping output (violates invariants)",
+    "Document your decision and reasoning in your code!"
+  ],
+  "possibleSolutions": [
+    {
+      "approach": "First-speaker-wins",
+      "output": [
+        { "start": 0, "end": 5000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+        { "start": 5000, "end": 7000, "speakerId": "speaker_2", "colorKey": "speaker_2" }
+      ]
+    },
+    {
+      "approach": "Last-speaker-wins",
+      "output": [
+        { "start": 0, "end": 3000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+        { "start": 3000, "end": 7000, "speakerId": "speaker_2", "colorKey": "speaker_2" }
+      ]
+    },
+    {
+      "approach": "Throw-error",
+      "output": "SegmentValidationError: Overlapping speaker segments detected"
+    }
+  ]
+}

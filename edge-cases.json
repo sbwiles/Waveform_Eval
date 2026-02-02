@@ -1,0 +1,126 @@
+{
+  "description": "Boundary conditions and edge cases to test robustness",
+  "testCases": [
+    {
+      "name": "Empty inputs",
+      "speakerSegments": [],
+      "cutSegments": [],
+      "expectedOutput": [],
+      "notes": "Should return empty array without errors"
+    },
+    {
+      "name": "Only cuts, no speakers",
+      "speakerSegments": [],
+      "cutSegments": [
+        { "start": 0, "end": 1000 }
+      ],
+      "expectedOutput": [
+        { "start": 0, "end": 1000, "speakerId": "CUT", "colorKey": "muted" }
+      ],
+      "notes": "Cut segments can exist without speaker segments"
+    },
+    {
+      "name": "Cut exactly matches speaker boundary",
+      "speakerSegments": [
+        { "start": 0, "end": 5000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [
+        { "start": 0, "end": 5000 }
+      ],
+      "expectedOutput": [
+        { "start": 0, "end": 5000, "speakerId": "CUT", "colorKey": "muted" }
+      ],
+      "notes": "Entire speaker segment is cut - should become one CUT segment"
+    },
+    {
+      "name": "Cut starts at speaker start",
+      "speakerSegments": [
+        { "start": 0, "end": 5000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [
+        { "start": 0, "end": 2000 }
+      ],
+      "expectedOutput": [
+        { "start": 0, "end": 2000, "speakerId": "CUT", "colorKey": "muted" },
+        { "start": 2000, "end": 5000, "speakerId": "speaker_1", "colorKey": "speaker_1" }
+      ]
+    },
+    {
+      "name": "Cut ends at speaker end",
+      "speakerSegments": [
+        { "start": 0, "end": 5000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [
+        { "start": 3000, "end": 5000 }
+      ],
+      "expectedOutput": [
+        { "start": 0, "end": 3000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+        { "start": 3000, "end": 5000, "speakerId": "CUT", "colorKey": "muted" }
+      ]
+    },
+    {
+      "name": "Zero-duration segment",
+      "speakerSegments": [
+        { "start": 1000, "end": 1000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [],
+      "expectedBehavior": "IMPLEMENTATION_DEPENDENT",
+      "options": [
+        "Filter out (ignore zero-duration segments)",
+        "Throw validation error",
+        "Keep in output"
+      ],
+      "notes": "Document your choice"
+    },
+    {
+      "name": "Negative start time (invalid)",
+      "speakerSegments": [
+        { "start": -100, "end": 1000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [],
+      "expectedBehavior": "Should throw SegmentValidationError or clamp to 0",
+      "notes": "Negative times are invalid"
+    },
+    {
+      "name": "End before start (invalid)",
+      "speakerSegments": [
+        { "start": 5000, "end": 1000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [],
+      "expectedBehavior": "Should throw SegmentValidationError",
+      "notes": "Backwards time range is invalid"
+    },
+    {
+      "name": "Adjacent cuts (should merge)",
+      "speakerSegments": [
+        { "start": 0, "end": 10000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [
+        { "start": 2000, "end": 3000 },
+        { "start": 3000, "end": 5000 }
+      ],
+      "expectedOutput": [
+        { "start": 0, "end": 2000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+        { "start": 2000, "end": 5000, "speakerId": "CUT", "colorKey": "muted" },
+        { "start": 5000, "end": 10000, "speakerId": "speaker_1", "colorKey": "speaker_1" }
+      ],
+      "notes": "Adjacent CUT segments should merge into one"
+    },
+    {
+      "name": "Overlapping cuts",
+      "speakerSegments": [
+        { "start": 0, "end": 10000, "speakerId": "speaker_1" }
+      ],
+      "cutSegments": [
+        { "start": 2000, "end": 5000 },
+        { "start": 4000, "end": 7000 }
+      ],
+      "expectedOutput": [
+        { "start": 0, "end": 2000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+        { "start": 2000, "end": 7000, "speakerId": "CUT", "colorKey": "muted" },
+        { "start": 7000, "end": 10000, "speakerId": "speaker_1", "colorKey": "speaker_1" }
+      ],
+      "notes": "Overlapping cuts should be merged into one continuous cut"
+    }
+  ]
+}

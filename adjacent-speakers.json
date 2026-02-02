@@ -1,0 +1,18 @@
+{
+  "description": "Test merging: same speaker appears in consecutive segments",
+  "speakerSegments": [
+    { "start": 0, "end": 2000, "speakerId": "host" },
+    { "start": 2000, "end": 4000, "speakerId": "host" },
+    { "start": 4000, "end": 6000, "speakerId": "guest" }
+  ],
+  "cutSegments": [],
+  "expectedOutput": [
+    { "start": 0, "end": 4000, "speakerId": "host", "colorKey": "host" },
+    { "start": 4000, "end": 6000, "speakerId": "guest", "colorKey": "guest" }
+  ],
+  "notes": [
+    "The two adjacent 'host' segments should merge into one",
+    "Final output should have only 2 segments, not 3",
+    "Tests the merging functionality"
+  ]
+}

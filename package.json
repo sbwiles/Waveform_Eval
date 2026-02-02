@@ -1,0 +1,32 @@
+{
+  "name": "waveform-mapper-challenge",
+  "version": "1.0.0",
+  "description": "Technical assessment: Waveform segment color mapping algorithm",
+  "main": "src/mapper.ts",
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "dev": "ts-node src/example.ts",
+    "check": "tsc --noEmit",
+    "build": "tsc",
+    "lint": "echo 'No linter configured - add ESLint if desired'"
+  },
+  "keywords": [
+    "assessment",
+    "algorithm",
+    "typescript",
+    "waveform",
+    "intervals"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0"
+  }
+}

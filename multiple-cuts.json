@@ -1,0 +1,27 @@
+{
+  "description": "Complex: multiple cuts within and across speaker segments",
+  "speakerSegments": [
+    { "start": 0, "end": 10000, "speakerId": "speaker_1" },
+    { "start": 10000, "end": 20000, "speakerId": "speaker_2" }
+  ],
+  "cutSegments": [
+    { "start": 2000, "end": 3000 },
+    { "start": 5000, "end": 6000 },
+    { "start": 9000, "end": 11000 }
+  ],
+  "expectedOutput": [
+    { "start": 0, "end": 2000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+    { "start": 2000, "end": 3000, "speakerId": "CUT", "colorKey": "muted" },
+    { "start": 3000, "end": 5000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+    { "start": 5000, "end": 6000, "speakerId": "CUT", "colorKey": "muted" },
+    { "start": 6000, "end": 9000, "speakerId": "speaker_1", "colorKey": "speaker_1" },
+    { "start": 9000, "end": 11000, "speakerId": "CUT", "colorKey": "muted" },
+    { "start": 11000, "end": 20000, "speakerId": "speaker_2", "colorKey": "speaker_2" }
+  ],
+  "notes": [
+    "Third cut crosses the speaker boundary (9000-11000)",
+    "This tests both intra-speaker and inter-speaker cuts",
+    "Should result in 7 segments total",
+    "All CUT segments should have speakerId='CUT' and colorKey='muted'"
+  ]
+}
