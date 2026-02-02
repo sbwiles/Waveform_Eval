@@ -1,42 +1,5 @@
 # Quick Start Guide
 
-## For Administrators
-
-### Setting Up the Assessment
-
-1. **Extract the package:**
-   ```bash
-   tar -xzf waveform-mapper-challenge.tar.gz
-   cd waveform-mapper-challenge
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Verify setup:**
-   ```bash
-   npm run check   # TypeScript should compile
-   npm test        # Tests should fail (not implemented)
-   npm run dev     # Should show "Not implemented" error
-   ```
-
-4. **Distribute to candidate:**
-   - Share the entire directory or zip file
-   - Ensure candidate has Node.js 18+ installed
-   - Provide 60-minute time limit
-   - Share README.md link first
-
-### Pre-Assessment Checklist
-
-- [ ] Node.js and npm are installed
-- [ ] Package installs successfully
-- [ ] TypeScript compiles without errors
-- [ ] Jest runs (even if tests fail)
-- [ ] Candidate has access to TypeScript docs if needed
-
----
 
 ## For Candidates
 
