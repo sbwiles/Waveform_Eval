@@ -268,20 +268,6 @@ segments: [{ start: 1000, end: 1000, speakerId: 'A' }]
 
 ---
 
-## Red Flags (Automatic Failure)
-
-These indicate fundamental issues:
-
-- ❌ Code doesn't compile
-- ❌ Tests don't run
-- ❌ Basic test case fails
-- ❌ Output has overlapping segments
-- ❌ Uses `any` type everywhere
-- ❌ 100+ line monolithic function
-- ❌ No attempt at testing
-
----
-
 ## What We're Really Looking For
 
 ### Technical Skills
@@ -296,13 +282,6 @@ These indicate fundamental issues:
 - Pragmatism (simple > clever)
 - Completeness (handles all cases)
 
-### Red Flags
-- Over-engineering (300 lines for simple task)
-- Under-engineering (no validation, no tests)
-- Lack of testing
-- Poor naming
-
----
 
 ## Time Management Guidance
 
@@ -359,35 +338,3 @@ These indicate fundamental issues:
 
 ---
 
-## Success Indicators
-
-**Good candidates will:**
-- Ask clarifying questions about overlaps
-- Write tests as they code
-- Document decisions clearly
-- Keep functions small and focused
-- Handle edge cases thoughtfully
-
-**Great candidates will:**
-- Write all tests first (TDD)
-- Create helper functions proactively
-- Add meaningful error messages
-- Consider performance implications
-- Leave code in better state than found
-
----
-
-## Post-Assessment Discussion
-
-After submission, discuss:
-1. How did you approach the problem?
-2. What was most challenging?
-3. How would you handle [specific edge case]?
-4. What would you change with more time?
-5. How would you optimize for production?
-
-This reveals:
-- Problem-solving process
-- Communication skills
-- Growth mindset
-- Production thinking
